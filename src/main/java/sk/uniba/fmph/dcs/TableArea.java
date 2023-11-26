@@ -8,7 +8,7 @@ public class TableArea{
     public TableArea(TableCenter tableCenter, ArrayList<Factory> factories){
         this._tyleSources = new ArrayList<>();
         this._tyleSources.add(tableCenter);
-        this._tyleSources.addAll((Collection<? extends TyleSource>) factories);
+        this._tyleSources.addAll(factories);
     }
 
     public ArrayList<Tile> take(int sourceId, int idx){
@@ -17,7 +17,7 @@ public class TableArea{
             return fin;
         }
         TyleSource tyleSource = _tyleSources.get(sourceId);
-        if(idx < 0 || idx >= _tyleSources.size()) {
+        if(idx < 0 || idx > 4) {
             return fin;
         }
         for (Tile t : tyleSource.take(idx)) {
@@ -42,8 +42,7 @@ public class TableArea{
     public String state(){
         StringBuilder ans = new StringBuilder();
         ans.append("TyleSources:\n");
-        for (TyleSource ts:
-                this._tyleSources) {
+        for (TyleSource ts: this._tyleSources) {
             ans.append(ts.state()).append("\n");
         }
         return ans.toString();
